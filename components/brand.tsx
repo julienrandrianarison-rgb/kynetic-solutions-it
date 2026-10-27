@@ -1,15 +1,16 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
-export function Brand() {
+export function Brand({ className = '' }: { className?: string }) {
   return (
-    <span className="flex items-center gap-2.5">
-      <Image src="/images/logo-symbol.png" alt="" width={32} height={34} className="h-8 w-auto" priority />
+    <Link href="#top" className={`flex items-center gap-3 ${className}`} aria-label="Kynetic Solutions, accueil">
+      <Image src="/images/logo-symbol.png" alt="" width={34} height={36} className="h-9 w-auto" priority />
       <span className="flex flex-col leading-none">
-        <span className="font-heading text-lg font-semibold tracking-tight">
-          Kynetic<span className="text-brand-cyan">.</span>
+        <span className="text-lg font-semibold tracking-tight text-foreground">
+          Kynetic<span className="text-cyan">.</span>
         </span>
-        <span className="text-[10px] font-medium tracking-[0.3em] text-muted-foreground">SOLUTIONS</span>
+        <span className="mt-1 font-mono text-[10px] tracking-[0.3em] text-muted-foreground">SOLUTIONS</span>
       </span>
-    </span>
+    </Link>
   )
 }

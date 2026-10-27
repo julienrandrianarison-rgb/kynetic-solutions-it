@@ -5,11 +5,14 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-sora);
-  --color-brand-cyan: var(--brand-cyan);
-  --color-brand-blue: var(--brand-blue);
-  --color-brand-indigo: var(--brand-indigo);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist);
+  --color-cyan: var(--cyan);
+  --color-electric: var(--electric);
+  --color-violet: var(--violet);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -28,38 +31,58 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
 }
 
 :root {
-  color-scheme: dark;
-  --brand-cyan: oklch(0.8 0.14 220);
-  --brand-blue: oklch(0.58 0.2 262);
-  --brand-indigo: oklch(0.32 0.16 285);
-  --background: oklch(0.15 0.04 282);
-  --foreground: oklch(0.97 0.01 270);
-  --card: oklch(0.19 0.05 282);
-  --card-foreground: oklch(0.97 0.01 270);
-  --popover: oklch(0.19 0.05 282);
-  --popover-foreground: oklch(0.97 0.01 270);
-  --primary: oklch(0.8 0.14 220);
-  --primary-foreground: oklch(0.15 0.04 282);
-  --secondary: oklch(0.24 0.06 282);
-  --secondary-foreground: oklch(0.97 0.01 270);
-  --muted: oklch(0.22 0.05 282);
-  --muted-foreground: oklch(0.74 0.03 275);
-  --accent: oklch(0.58 0.2 262);
+  --cyan: oklch(0.82 0.13 215);
+  --electric: oklch(0.63 0.2 262);
+  --violet: oklch(0.55 0.2 285);
+  --surface: oklch(0.17 0.025 270);
+  --surface-2: oklch(0.21 0.03 270);
+  --background: oklch(0.13 0.022 270);
+  --foreground: oklch(0.97 0.005 260);
+  --card: oklch(0.17 0.025 270);
+  --card-foreground: oklch(0.97 0.005 260);
+  --popover: oklch(0.17 0.025 270);
+  --popover-foreground: oklch(0.97 0.005 260);
+  --primary: oklch(0.82 0.13 215);
+  --primary-foreground: oklch(0.15 0.03 270);
+  --secondary: oklch(0.21 0.03 270);
+  --secondary-foreground: oklch(0.97 0.005 260);
+  --muted: oklch(0.21 0.03 270);
+  --muted-foreground: oklch(0.7 0.025 265);
+  --accent: oklch(0.63 0.2 262);
   --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.65 0.2 20);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.8 0.14 220);
-  --radius: 0.75rem;
+  --destructive: oklch(0.62 0.2 25);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.82 0.13 215);
+  --radius: 0.875rem;
 }
 
 @layer base {
@@ -68,23 +91,37 @@
   }
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
   body {
     @apply bg-background text-foreground font-sans;
   }
   h1,
   h2,
-  h3,
-  h4 {
+  h3 {
     @apply font-heading tracking-tight text-balance;
+  }
+  ::selection {
+    background: oklch(0.82 0.13 215 / 35%);
   }
 }
 
+@utility eyebrow {
+  font-family: var(--font-geist-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 @utility text-gradient {
-  background-image: linear-gradient(100deg, var(--brand-cyan), var(--brand-blue));
+  background-image: linear-gradient(100deg, var(--cyan) 0%, var(--electric) 55%, var(--violet) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(110deg, var(--cyan) 0%, var(--electric) 60%, var(--violet) 100%);
 }
 
 @utility bg-grid {
@@ -92,4 +129,17 @@
     linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
     linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px);
   background-size: 56px 56px;
+}
+
+@utility glass {
+  background-color: oklch(0.17 0.025 270 / 60%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-pulse-soft {
+    animation: none;
+  }
 }

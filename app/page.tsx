@@ -1,6 +1,8 @@
 import { SiteHeader } from '@/components/site-header'
 import { Hero } from '@/components/hero'
+import { Marquee } from '@/components/marquee'
 import { Services } from '@/components/services'
+import { NetworkSection } from '@/components/network-section'
 import { OdooSection } from '@/components/odoo-section'
 import { Offers } from '@/components/offers'
 import { Method } from '@/components/method'
@@ -14,7 +16,9 @@ export default function Home() {
       <SiteHeader />
       <main>
         <Hero />
+        <Marquee />
         <Services />
+        <NetworkSection />
         <OdooSection />
         <Offers />
         <Method />

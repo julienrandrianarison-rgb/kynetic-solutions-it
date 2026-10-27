@@ -1,99 +1,115 @@
-import { Compass, Network, ShieldCheck, Boxes, Cloud, GraduationCap, Check } from 'lucide-react'
+import { Boxes, Cable, Compass, GraduationCap, Server, ShieldCheck, Sparkles, type LucideIcon } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 
-const pillars = [
+type Service = {
+  icon: LucideIcon
+  title: string
+  description: string
+  points: string[]
+  tag?: string
+  span: string
+}
+
+const services: Service[] = [
   {
-    icon: Compass,
-    code: 'A',
-    title: 'Conseil & gouvernance SI',
-    description: 'Une direction IT externalisée pour piloter votre informatique.',
-    items: ['Audit SI & Diagnostic Flash', 'Schéma directeur 3 ans', 'Direction IT à temps partagé', 'PMO & pilotage de projets'],
-  },
-  {
-    icon: Network,
-    code: 'B',
-    title: 'Infrastructure & infogérance',
-    description: 'Un parc, un réseau et des serveurs fiables, supervisés et documentés.',
-    items: ['Support utilisateurs Bronze / Argent / Or', 'Réseau, Wi-Fi pro & VLAN', 'Administration serveurs Linux', 'Hébergement géré & Docker'],
-  },
-  {
-    icon: ShieldCheck,
-    code: 'C',
-    title: 'Cybersécurité & continuité',
-    description: 'Vos données protégées et votre activité capable de redémarrer.',
-    items: ['Audit sécurité & politique SSI', 'Sauvegarde 3-2-1 gérée', "Plan de reprise d'activité", 'Sensibilisation au phishing'],
+    icon: Cable,
+    title: 'Installation réseau de zéro',
+    description: 'Du plan de câblage à la mise en service : un réseau neuf, propre et documenté.',
+    points: ['Câblage Cat6 / fibre', 'Baie de brassage', 'Wi-Fi professionnel'],
+    tag: 'Nouveau',
+    span: 'lg:col-span-2',
   },
   {
     icon: Boxes,
-    code: 'D',
     title: 'Solutions ERP',
     description: 'Une gestion unifiée : ventes, stock, comptabilité, RH et CRM.',
-    items: ['Cadrage & choix des modules', 'Paramétrage et migration', 'Formation des équipes', 'Support et évolution'],
-    highlight: true,
+    points: ['Paramétrage local', 'Migration des données', 'Formation des équipes'],
+    span: 'lg:col-span-2',
   },
   {
-    icon: Cloud,
-    code: 'E',
+    icon: Compass,
+    title: 'Conseil & pilotage IT',
+    description: 'Un pilotage IT à temps partagé, sans recruter en interne.',
+    points: ['Schéma directeur', 'Budget IT maîtrisé'],
+    span: '',
+  },
+  {
+    icon: Server,
+    title: 'Infrastructure & infogérance',
+    description: 'Un parc et des serveurs fiables, supervisés au quotidien.',
+    points: ['Supervision 24/7', 'Helpdesk utilisateurs'],
+    span: '',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Cybersécurité & continuité',
+    description: 'Vos données protégées et votre activité capable de redémarrer.',
+    points: ['Sauvegardes 3-2-1', 'Audit & PRA'],
+    span: '',
+  },
+  {
+    icon: Sparkles,
     title: 'Digitalisation & IA',
-    description: 'Les bons outils SaaS, adoptés par vos équipes.',
-    items: ['Google Workspace / Microsoft 365', 'Messagerie & GED', "Ateliers d'adoption de l'IA", 'Automatisations simples'],
+    description: 'Les bons outils SaaS et l’IA, réellement adoptés par vos équipes.',
+    points: ['Microsoft 365 / Google', 'Automatisation'],
+    span: '',
   },
   {
     icon: GraduationCap,
-    code: 'F',
     title: 'Formation & talents IT',
-    description: 'Faire monter vos équipes en compétence durablement.',
-    items: ['Agile / Scrum & gestion de projet', 'Recrutement de profils IT', 'Mentorat technique', 'Coaching du responsable IT'],
+    description: 'Faire monter vos équipes en compétence, durablement.',
+    points: ['Sessions sur site', 'Guides en français'],
+    span: 'lg:col-span-4',
   },
 ]
 
 export function Services() {
   return (
-    <section id="services" className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-        <SectionHeading
-          eyebrow="Nos expertises"
-          title={
-            <>
-              Six piliers pour un système d&apos;information <span className="text-gradient">serein</span>.
-            </>
-          }
-          description="De la stratégie à l'exploitation quotidienne, nous prenons en charge votre SI de bout en bout — avec un seul interlocuteur."
-        />
+    <section id="services" className="relative scroll-mt-24 py-24 md:py-32">
+      <div className="mx-auto w-full max-w-[1600px] px-4 md:px-8">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <SectionHeading
+            eyebrow="Nos services"
+            title="Tout votre système d’information,"
+            highlight="un seul partenaire."
+          />
+          <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
+            Sept expertises complémentaires pour concevoir, sécuriser et faire évoluer votre informatique.
+          </p>
+        </div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {pillars.map((p) => (
-            <article
-              key={p.code}
-              className={`group relative flex flex-col rounded-3xl border p-7 transition-colors ${
-                p.highlight
-                  ? 'border-brand-cyan/40 bg-gradient-to-b from-brand-blue/20 to-card'
-                  : 'border-border bg-card/60 hover:border-brand-cyan/30'
-              }`}
+        <ul className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {services.map((s) => (
+            <li
+              key={s.title}
+              className={`group relative flex flex-col gap-6 overflow-hidden rounded-3xl border border-border bg-surface p-7 transition-colors hover:border-cyan/40 ${s.span}`}
             >
-              <div className="flex items-center justify-between">
-                <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-cyan to-brand-blue text-primary-foreground">
-                  <p.icon className="size-6" aria-hidden />
+              <div
+                className="absolute -right-20 -top-20 size-56 rounded-full bg-electric/0 blur-3xl transition-colors duration-500 group-hover:bg-electric/25"
+                aria-hidden="true"
+              />
+              <div className="relative flex items-center justify-between">
+                <span className="flex size-12 items-center justify-center rounded-2xl border border-border bg-background">
+                  <s.icon className="size-5 text-cyan" aria-hidden="true" />
                 </span>
-                {p.highlight ? (
-                  <span className="rounded-full bg-brand-cyan/15 px-3 py-1 text-xs font-medium text-brand-cyan">Nouveau</span>
-                ) : (
-                  <span className="font-heading text-sm text-muted-foreground">Pilier {p.code}</span>
+                {s.tag && (
+                  <span className="bg-brand-gradient rounded-full px-3 py-1 text-xs font-medium text-background">{s.tag}</span>
                 )}
               </div>
-              <h3 className="mt-6 text-xl font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.description}</p>
-              <ul className="mt-6 flex flex-col gap-2.5 border-t border-border pt-6">
-                {p.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm">
-                    <Check className="mt-0.5 size-4 shrink-0 text-brand-cyan" aria-hidden />
-                    {item}
+              <div className="relative flex flex-1 flex-col gap-3">
+                <h3 className="text-xl font-semibold md:text-2xl">{s.title}</h3>
+                <p className="leading-relaxed text-muted-foreground">{s.description}</p>
+              </div>
+              <ul className="relative flex flex-wrap gap-2">
+                {s.points.map((p) => (
+                  <li key={p} className="rounded-full border border-border bg-background/60 px-3 py-1 text-sm text-muted-foreground">
+                    {p}
                   </li>
                 ))}
               </ul>
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

@@ -1,15 +1,15 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Sora } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const sora = Sora({ subsets: ['latin'], variable: '--font-sora' })
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
 
 export const metadata: Metadata = {
-  title: 'Kynetic Solutions | Direction IT externalisée, ERP & services IT à Madagascar',
+  title: 'Kynetic Solutions | Pilotage IT, réseaux, ERP & cybersécurité à Madagascar',
   description:
-    "Kynetic Solutions accompagne les PME et groupes de Madagascar : direction IT à temps partagé, infogérance, cybersécurité, intégration ERP et formation. Une solution IT complète avec un interlocuteur unique.",
+    "Kynetic Solutions accompagne les PME et groupes de Madagascar : pilotage IT à temps partagé, installation réseau de zéro, infogérance, cybersécurité, solutions ERP et formation. Un interlocuteur unique.",
   generator: 'v0.app',
   icons: {
     icon: '/images/logo-symbol.png',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#120d2b',
+  themeColor: '#0a0c16',
 }
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${sora.variable}`}>
+    <html lang="fr" className={`${geist.variable} ${geistMono.variable} bg-background`}>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

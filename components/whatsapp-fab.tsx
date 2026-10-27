@@ -7,9 +7,9 @@ export function WhatsappFab() {
       href={contact.whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 flex size-14 items-center justify-center rounded-full bg-gradient-to-br from-brand-cyan to-brand-blue text-primary-foreground shadow-xl shadow-brand-blue/40 transition-transform hover:scale-105"
+      className="bg-brand-gradient fixed bottom-5 right-5 z-40 inline-flex size-14 items-center justify-center rounded-full text-background shadow-[0_10px_40px_-8px] shadow-electric/70 transition-transform hover:scale-105"
     >
-      <MessageCircle className="size-6" aria-hidden />
+      <MessageCircle className="size-6" aria-hidden="true" />
       <span className="sr-only">Nous écrire sur WhatsApp</span>
     </a>
   )

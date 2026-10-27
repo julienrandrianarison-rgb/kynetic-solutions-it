@@ -1,19 +1,27 @@
 export function SectionHeading({
   eyebrow,
   title,
+  highlight,
   description,
   align = 'left',
 }: {
   eyebrow: string
-  title: React.ReactNode
+  title: string
+  highlight?: string
   description?: string
   align?: 'left' | 'center'
 }) {
+  const centered = align === 'center'
   return (
-    <div className={align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}>
-      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-cyan">{eyebrow}</p>
-      <h2 className="mt-4 text-3xl font-semibold leading-tight md:text-5xl">{title}</h2>
-      {description && <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">{description}</p>}
+    <div className={`flex max-w-3xl flex-col gap-5 ${centered ? 'mx-auto items-center text-center' : ''}`}>
+      <span className="eyebrow inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-cyan">
+        <span className="size-1.5 rounded-full bg-cyan" aria-hidden="true" />
+        {eyebrow}
+      </span>
+      <h2 className="text-4xl font-semibold leading-[1.05] md:text-5xl lg:text-6xl">
+        {title} {highlight && <span className="text-gradient">{highlight}</span>}
+      </h2>
+      {description && <p className="text-pretty text-lg leading-relaxed text-muted-foreground">{description}</p>}
     </div>
   )
 }
